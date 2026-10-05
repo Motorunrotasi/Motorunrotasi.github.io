@@ -1,1 +1,228 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motorun Rotası</title>
 
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(180, 0, 0, 0.25), transparent 35%),
+        linear-gradient(180deg, #090909 0%, #111 100%);
+      color: white;
+      display: flex;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+    }
+
+    .profile {
+      margin-bottom: 28px;
+    }
+
+    .profile-image {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      border: 3px solid #d00000;
+      background: #1a1a1a;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44px;
+      box-shadow: 0 0 30px rgba(208, 0, 0, 0.35);
+    }
+
+    h1 {
+      font-size: 30px;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      color: #aaa;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .link-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 64px;
+      padding: 16px 20px;
+      text-decoration: none;
+      color: white;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      font-weight: 700;
+      font-size: 16px;
+      transition: 0.25s ease;
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+
+    .link-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(208, 0, 0, 0.18),
+        transparent
+      );
+      transform: translateX(-100%);
+      transition: 0.5s ease;
+    }
+
+    .link-card:hover {
+      transform: translateY(-3px) scale(1.01);
+      border-color: rgba(255, 0, 0, 0.55);
+      box-shadow: 0 10px 30px rgba(208, 0, 0, 0.18);
+    }
+
+    .link-card:hover::before {
+      transform: translateX(100%);
+    }
+
+    .icon {
+      position: absolute;
+      left: 20px;
+      font-size: 22px;
+    }
+
+    .featured {
+      background: linear-gradient(135deg, #b00000, #e10000);
+      border: none;
+      box-shadow: 0 12px 30px rgba(180, 0, 0, 0.25);
+    }
+
+    .featured:hover {
+      box-shadow: 0 15px 40px rgba(220, 0, 0, 0.4);
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .pulse {
+      animation: pulse 2.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(220, 0, 0, 0.25);
+      }
+      50% {
+        box-shadow: 0 0 0 12px rgba(220, 0, 0, 0);
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding-top: 24px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      .link-card {
+        min-height: 60px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+
+    <section class="profile">
+      <div class="profile-image pulse">🏍️</div>
+
+      <h1>Motorun Rotası</h1>
+
+      <p class="subtitle">
+        Motosiklet • Yol • Macera<br>
+        Tüm bağlantılar burada.
+      </p>
+    </section>
+
+    <section class="links">
+
+      <a class="link-card featured"
+         href="https://www.youtube.com/"
+         target="_blank">
+        <span class="icon">▶️</span>
+        YouTube
+      </a>
+
+      <a class="link-card"
+         href="https://www.instagram.com/"
+         target="_blank">
+        <span class="icon">📸</span>
+        Instagram
+      </a>
+
+      <a class="link-card"
+         href="https://www.tiktok.com/"
+         target="_blank">
+        <span class="icon">🎵</span>
+        TikTok
+      </a>
+
+      <a class="link-card"
+         href="https://www.facebook.com/"
+         target="_blank">
+        <span class="icon">🔵</span>
+        Facebook
+      </a>
+
+      <a class="link-card"
+         href="#"
+         target="_blank">
+        <span class="icon">🌐</span>
+        Web Sitesi
+      </a>
+
+      <a class="link-card"
+         href="mailto:mail@ornek.com">
+        <span class="icon">✉️</span>
+        İletişim
+      </a>
+
+    </section>
+
+    <footer class="footer">
+      © 2026 Motorun Rotası
+    </footer>
+
+  </main>
+</body>
+</html>
