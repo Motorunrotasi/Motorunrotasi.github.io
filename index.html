@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Motorun Rotası</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Motorun Rotası | M.Gör</title>
+
+  <meta name="description"
+        content="Motorun Rotası - Yol, yalnızlık ve özgürlük. Instagram'da kesitler, hikayenin tamamı YouTube'da.">
 
   <style>
     * {
@@ -12,217 +16,777 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      min-height: 100%;
+    }
+
     body {
-      min-height: 100vh;
       font-family: Arial, Helvetica, sans-serif;
+      background: #050505;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       BACKGROUND SLIDESHOW
+    ========================== */
+
+    .backgrounds {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      overflow: hidden;
+      background: #050505;
+    }
+
+    .bg {
+      position: absolute;
+      inset: -4%;
+      background-position: center;
+      background-size: cover;
+      opacity: 0;
+      transform: scale(1.06);
+      animation: backgroundFade 21s infinite;
+    }
+
+    .bg1 {
+      background-image: url("3.PNG");
+      animation-delay: 0s;
+    }
+
+    .bg2 {
+      background-image: url("2.jpg");
+      animation-delay: 7s;
+    }
+
+    .bg3 {
+      background-image: url("1.jpg");
+      animation-delay: 14s;
+    }
+
+    @keyframes backgroundFade {
+      0% {
+        opacity: 0;
+        transform: scale(1.06);
+      }
+
+      8% {
+        opacity: 1;
+      }
+
+      28% {
+        opacity: 1;
+        transform: scale(1.12);
+      }
+
+      38% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
       background:
-        radial-gradient(circle at top, rgba(180, 0, 0, 0.25), transparent 35%),
-        linear-gradient(180deg, #090909 0%, #111 100%);
-      color: white;
+        linear-gradient(
+          180deg,
+          rgba(0,0,0,.48) 0%,
+          rgba(0,0,0,.65) 45%,
+          rgba(0,0,0,.88) 100%
+        );
+    }
+
+    .vignette {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+
+      background:
+        radial-gradient(
+          circle at center,
+          transparent 20%,
+          rgba(0,0,0,.55) 100%
+        );
+    }
+
+    /* =========================
+       PAGE
+    ========================== */
+
+    .page {
+      min-height: 100vh;
+      width: 100%;
+
       display: flex;
       justify-content: center;
-      padding: 32px 16px;
+
+      padding:
+        max(38px, env(safe-area-inset-top))
+        18px
+        35px;
     }
 
     .container {
       width: 100%;
-      max-width: 520px;
+      max-width: 510px;
       text-align: center;
     }
 
-    .profile {
-      margin-bottom: 28px;
+    /* =========================
+       PROFILE
+    ========================== */
+
+    .profile-photo-wrap {
+      width: 116px;
+      height: 116px;
+      margin: 0 auto 17px;
+      padding: 3px;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff,
+          #777,
+          #111
+        );
+
+      box-shadow:
+        0 12px 40px rgba(0,0,0,.55);
     }
 
-    .profile-image {
-      width: 112px;
-      height: 112px;
+    .profile-photo {
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
-      border: 3px solid #d00000;
-      background: #1a1a1a;
-      margin: 0 auto 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 44px;
-      box-shadow: 0 0 30px rgba(208, 0, 0, 0.35);
+      object-fit: cover;
+      display: block;
+
+      border: 3px solid #080808;
     }
 
     h1 {
-      font-size: 30px;
-      margin-bottom: 8px;
-      letter-spacing: -0.5px;
+      font-size: 31px;
+      line-height: 1.1;
+      letter-spacing: -.7px;
+      font-weight: 800;
     }
 
-    .subtitle {
-      color: #aaa;
-      font-size: 15px;
-      line-height: 1.5;
+    .handle {
+      margin-top: 7px;
+      color: rgba(255,255,255,.63);
+      font-size: 14px;
     }
+
+    .motto {
+      margin-top: 18px;
+
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+
+      color: rgba(255,255,255,.93);
+    }
+
+    .bio {
+      max-width: 400px;
+      margin: 12px auto 27px;
+
+      font-size: 14px;
+      line-height: 1.6;
+
+      color: rgba(255,255,255,.72);
+    }
+
+    .bio strong {
+      color: #fff;
+    }
+
+    /* =========================
+       LINKS
+    ========================== */
 
     .links {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
-    .link-card {
+    .link {
       position: relative;
+
+      min-height: 64px;
+      width: 100%;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 64px;
-      padding: 16px 20px;
-      text-decoration: none;
+
+      padding: 15px 58px;
+
       color: white;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      text-decoration: none;
+
       border-radius: 18px;
-      font-weight: 700;
-      font-size: 16px;
-      transition: 0.25s ease;
-      backdrop-filter: blur(10px);
-      overflow: hidden;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(25,25,25,.76),
+          rgba(10,10,10,.78)
+        );
+
+      border: 1px solid rgba(255,255,255,.16);
+
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+
+      box-shadow:
+        0 8px 30px rgba(0,0,0,.25);
+
+      transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
     }
 
-    .link-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(208, 0, 0, 0.18),
-        transparent
-      );
-      transform: translateX(-100%);
-      transition: 0.5s ease;
-    }
+    .link:hover {
+      transform: translateY(-3px);
 
-    .link-card:hover {
-      transform: translateY(-3px) scale(1.01);
-      border-color: rgba(255, 0, 0, 0.55);
-      box-shadow: 0 10px 30px rgba(208, 0, 0, 0.18);
-    }
+      border-color: rgba(255,255,255,.45);
 
-    .link-card:hover::before {
-      transform: translateX(100%);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(42,42,42,.9),
+          rgba(15,15,15,.9)
+        );
+
+      box-shadow:
+        0 15px 40px rgba(0,0,0,.45);
     }
 
     .icon {
       position: absolute;
       left: 20px;
-      font-size: 22px;
+
+      width: 30px;
+      height: 30px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .featured {
-      background: linear-gradient(135deg, #b00000, #e10000);
-      border: none;
-      box-shadow: 0 12px 30px rgba(180, 0, 0, 0.25);
+    .icon svg {
+      width: 25px;
+      height: 25px;
+      fill: currentColor;
     }
 
-    .featured:hover {
-      box-shadow: 0 15px 40px rgba(220, 0, 0, 0.4);
+    .link-text {
+      text-align: center;
     }
 
-    .footer {
-      margin-top: 30px;
-      font-size: 12px;
-      color: #666;
+    .link-title {
+      font-size: 16px;
+      font-weight: 700;
     }
 
-    .pulse {
-      animation: pulse 2.5s infinite;
+    .link-subtitle {
+      margin-top: 3px;
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(255,255,255,.54);
     }
 
-    @keyframes pulse {
-      0%, 100% {
-        box-shadow: 0 0 0 0 rgba(220, 0, 0, 0.25);
+    /* YouTube featured */
+
+    .youtube {
+      min-height: 72px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(190,0,0,.93),
+          rgba(105,0,0,.88)
+        );
+
+      border-color: rgba(255,80,80,.40);
+
+      box-shadow:
+        0 12px 35px rgba(180,0,0,.22);
+    }
+
+    .youtube:hover {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(225,0,0,.98),
+          rgba(130,0,0,.95)
+        );
+
+      border-color: rgba(255,120,120,.65);
+
+      box-shadow:
+        0 15px 45px rgba(190,0,0,.34);
+    }
+
+    /* =========================
+       SMALL SOCIAL BAR
+    ========================== */
+
+    .social-small {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+
+      margin-top: 27px;
+    }
+
+    .social-small a {
+      color: rgba(255,255,255,.58);
+      transition: .2s ease;
+    }
+
+    .social-small a:hover {
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .social-small svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      margin-top: 24px;
+      font-size: 11px;
+      color: rgba(255,255,255,.35);
+      letter-spacing: .4px;
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 600px) {
+
+      .page {
+        padding-top: 30px;
       }
-      50% {
-        box-shadow: 0 0 0 12px rgba(220, 0, 0, 0);
-      }
-    }
 
-    @media (max-width: 480px) {
-      body {
-        padding-top: 24px;
+      .profile-photo-wrap {
+        width: 103px;
+        height: 103px;
       }
 
       h1 {
-        font-size: 26px;
+        font-size: 27px;
       }
 
-      .link-card {
+      .motto {
+        font-size: 13px;
+      }
+
+      .bio {
+        font-size: 13px;
+      }
+
+      .link {
         min-height: 60px;
+        border-radius: 16px;
+      }
+
+      .youtube {
+        min-height: 67px;
+      }
+
+      .bg1 {
+        background-position: 55% center;
+      }
+
+      .bg2 {
+        background-position: 56% center;
+      }
+
+      .bg3 {
+        background-position: 53% center;
       }
     }
+
+    /* Daha az hareket isteyen kullanıcılar */
+
+    @media (prefers-reduced-motion: reduce) {
+      .bg {
+        animation: none;
+      }
+
+      .bg1 {
+        opacity: 1;
+      }
+
+      .link {
+        transition: none;
+      }
+    }
+
   </style>
 </head>
 
 <body>
-  <main class="container">
 
-    <section class="profile">
-      <div class="profile-image pulse">🏍️</div>
+  <!-- Arka plan -->
+  <div class="backgrounds">
+    <div class="bg bg1"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+  </div>
 
-      <h1>Motorun Rotası</h1>
+  <div class="overlay"></div>
+  <div class="vignette"></div>
 
-      <p class="subtitle">
-        Motosiklet • Yol • Macera<br>
-        Tüm bağlantılar burada.
-      </p>
-    </section>
 
-    <section class="links">
+  <main class="page">
 
-      <a class="link-card featured"
-         href="https://www.youtube.com/"
-         target="_blank">
-        <span class="icon">▶️</span>
-        YouTube
-      </a>
+    <div class="container">
 
-      <a class="link-card"
-         href="https://www.instagram.com/"
-         target="_blank">
-        <span class="icon">📸</span>
-        Instagram
-      </a>
+      <!-- Profil -->
+      <div class="profile-photo-wrap">
+        <img
+          src="1.jpg"
+          alt="Motorun Rotası"
+          class="profile-photo">
+      </div>
 
-      <a class="link-card"
-         href="https://www.tiktok.com/"
-         target="_blank">
-        <span class="icon">🎵</span>
-        TikTok
-      </a>
 
-      <a class="link-card"
-         href="https://www.facebook.com/"
-         target="_blank">
-        <span class="icon">🔵</span>
-        Facebook
-      </a>
+      <h1>MOTORUN ROTASI</h1>
 
-      <a class="link-card"
-         href="#"
-         target="_blank">
-        <span class="icon">🌐</span>
-        Web Sitesi
-      </a>
+      <div class="handle">
+        @motorunrotasi.tv
+      </div>
 
-      <a class="link-card"
-         href="mailto:mail@ornek.com">
-        <span class="icon">✉️</span>
-        İletişim
-      </a>
 
-    </section>
+      <div class="motto">
+        YOL&nbsp;&nbsp;|&nbsp;&nbsp;YALNIZLIK&nbsp;&nbsp;|&nbsp;&nbsp;ÖZGÜRLÜK
+      </div>
 
-    <footer class="footer">
-      © 2026 Motorun Rotası
-    </footer>
+
+      <div class="bio">
+
+        📍 Mersin &nbsp;|&nbsp; İstanbul
+
+        <br>
+
+        Instagram'da kesitler,
+
+        <br>
+
+        <strong>hikayenin tamamı YouTube'da.</strong>
+
+      </div>
+
+
+      <!-- Linkler -->
+      <div class="links">
+
+
+        <!-- YOUTUBE -->
+
+        <a
+          class="link youtube"
+          href="https://www.youtube.com/@MotorunRotasi"
+          target="_blank"
+          rel="noopener">
+
+          <span class="icon">
+
+            <svg viewBox="0 0 24 24">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505
+              3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017
+              3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0
+              3.93.502 5.814a3.017 3.017 0 0 0
+              2.121 2.136c1.872.505 9.377.505
+              9.377.505s7.505 0 9.377-.505a3.016
+              3.016 0 0 0 2.122-2.136C24 15.93
+              24 12 24 12s0-3.93-.502-5.814zM9.545
+              15.568V8.432L15.818 12l-6.273
+              3.568z"/>
+            </svg>
+
+          </span>
+
+          <div class="link-text">
+            <div class="link-title">YouTube</div>
+            <div class="link-subtitle">
+              Hikayenin tamamını izle
+            </div>
+          </div>
+
+        </a>
+
+
+        <!-- INSTAGRAM -->
+
+        <a
+          class="link"
+          href="https://www.instagram.com/motorunrotasi.tv"
+          target="_blank"
+          rel="noopener">
+
+          <span class="icon">
+
+            <svg viewBox="0 0 24 24">
+              <path d="M7.75 2h8.5A5.76 5.76 0 0
+              1 22 7.75v8.5A5.76 5.76 0
+              0 1 16.25 22h-8.5A5.76
+              5.76 0 0 1 2 16.25v-8.5A5.76
+              5.76 0 0 1 7.75 2zm0
+              2A3.75 3.75 0 0 0 4 7.75v8.5A3.75
+              3.75 0 0 0 7.75 20h8.5A3.75
+              3.75 0 0 0 20 16.25v-8.5A3.75
+              3.75 0 0 0 16.25 4h-8.5zm8.75
+              1.5a1 1 0 1 1 0 2 1 1
+              0 0 1 0-2zM12 7a5 5 0
+              1 1 0 10 5 5 0 0 1 0-10zm0
+              2a3 3 0 1 0 0 6 3 3
+              0 0 0 0-6z"/>
+            </svg>
+
+          </span>
+
+          <div class="link-text">
+            <div class="link-title">Instagram</div>
+            <div class="link-subtitle">
+              @motorunrotasi.tv
+            </div>
+          </div>
+
+        </a>
+
+
+        <!-- TIKTOK -->
+
+        <a
+          class="link"
+          href="https://www.tiktok.com/@motorunrotasi"
+          target="_blank"
+          rel="noopener">
+
+          <span class="icon">
+
+            <svg viewBox="0 0 24 24">
+              <path d="M19.321 5.562a5.124 5.124
+              0 0 1-3.49-1.36A5.12 5.12
+              0 0 1 14.422.8h-3.064v14.39a2.878
+              2.878 0 1 1-2.878-2.878c.298
+              0 .585.045.855.129V9.317a5.94
+              5.94 0 0 0-.855-.062 5.94
+              5.94 0 1 0 5.942 5.942V8.001a8.17
+              8.17 0 0 0 4.899 1.626V5.562z"/>
+            </svg>
+
+          </span>
+
+          <div class="link-text">
+            <div class="link-title">TikTok</div>
+            <div class="link-subtitle">
+              @motorunrotasi
+            </div>
+          </div>
+
+        </a>
+
+
+        <!-- FACEBOOK -->
+
+        <a
+          class="link"
+          href="https://www.facebook.com/musti.s4ys"
+          target="_blank"
+          rel="noopener">
+
+          <span class="icon">
+
+            <svg viewBox="0 0 24 24">
+              <path d="M24 12.073C24 5.405
+              18.627 0 12 0S0 5.405 0
+              12.073C0 18.098 4.388 23.094
+              10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025
+              1.792-4.697 4.533-4.697 1.312
+              0 2.686.235 2.686.235v2.971h-1.513c-1.491
+              0-1.956.931-1.956 1.887v2.264h3.328l-.532
+              3.49h-2.796V24C19.612 23.094
+              24 18.098 24 12.073z"/>
+            </svg>
+
+          </span>
+
+          <div class="link-text">
+            <div class="link-title">Facebook</div>
+          </div>
+
+        </a>
+
+
+        <!-- X -->
+
+        <a
+          class="link"
+          href="https://x.com/motorunrotasi"
+          target="_blank"
+          rel="noopener">
+
+          <span class="icon">
+
+            <svg viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227
+              8.26 8.502 11.24H16.17l-5.214-6.817L4.99
+              21.75H1.68l7.73-8.835L1.254
+              2.25H8.08l4.713 6.231
+              5.45-6.231zm-1.161
+              17.52h1.833L7.084
+              4.126H5.117L17.083 19.77z"/>
+            </svg>
+
+          </span>
+
+          <div class="link-text">
+            <div class="link-title">X</div>
+            <div class="link-subtitle">
+              @motorunrotasi
+            </div>
+          </div>
+
+        </a>
+
+      </div>
+
+
+      <!-- Küçük ikonlar -->
+      <div class="social-small">
+
+        <a href="https://www.youtube.com/@MotorunRotasi"
+           target="_blank"
+           aria-label="YouTube">
+
+          <svg viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016
+            0 0 0-2.122-2.136C19.505
+            3.545 12 3.545 12 3.545s-7.505
+            0-9.377.505A3.017 3.017 0 0 0
+            .502 6.186C0 8.07 0 12 0
+            12s0 3.93.502 5.814a3.017
+            3.017 0 0 0 2.121
+            2.136c1.872.505 9.377.505
+            9.377.505s7.505 0 9.377-.505a3.016
+            3.016 0 0 0 2.122-2.136C24
+            15.93 24 12 24 12s0-3.93-.502-5.814zM9.545
+            15.568V8.432L15.818
+            12l-6.273 3.568z"/>
+          </svg>
+
+        </a>
+
+
+        <a href="https://www.instagram.com/motorunrotasi.tv"
+           target="_blank"
+           aria-label="Instagram">
+
+          <svg viewBox="0 0 24 24">
+            <path d="M7.75 2h8.5A5.76 5.76
+            0 0 1 22 7.75v8.5A5.76
+            5.76 0 0 1 16.25 22h-8.5A5.76
+            5.76 0 0 1 2 16.25v-8.5A5.76
+            5.76 0 0 1 7.75 2zm0 2A3.75
+            3.75 0 0 0 4 7.75v8.5A3.75
+            3.75 0 0 0 7.75 20h8.5A3.75
+            3.75 0 0 0 20 16.25v-8.5A3.75
+            3.75 0 0 0 16.25 4h-8.5z"/>
+          </svg>
+
+        </a>
+
+
+        <a href="https://www.tiktok.com/@motorunrotasi"
+           target="_blank"
+           aria-label="TikTok">
+
+          <svg viewBox="0 0 24 24">
+            <path d="M19.321 5.562a5.124
+            5.124 0 0 1-3.49-1.36A5.12
+            5.12 0 0 1 14.422.8h-3.064v14.39a2.878
+            2.878 0 1 1-2.878-2.878c.298
+            0 .585.045.855.129V9.317a5.94
+            5.94 0 0 0-.855-.062 5.94
+            5.94 0 1 0 5.942 5.942V8.001a8.17
+            8.17 0 0 0 4.899
+            1.626V5.562z"/>
+          </svg>
+
+        </a>
+
+
+        <a href="https://www.facebook.com/musti.s4ys"
+           target="_blank"
+           aria-label="Facebook">
+
+          <svg viewBox="0 0 24 24">
+            <path d="M24 12.073C24
+            5.405 18.627 0 12 0S0
+            5.405 0 12.073C0 18.098
+            4.388 23.094 10.125
+            24v-8.437H7.078v-3.49h3.047V9.413c0-3.025
+            1.792-4.697 4.533-4.697
+            1.312 0 2.686.235
+            2.686.235v2.971h-1.513c-1.491
+            0-1.956.931-1.956 1.887v2.264h3.328l-.532
+            3.49h-2.796V24C19.612
+            23.094 24 18.098 24
+            12.073z"/>
+          </svg>
+
+        </a>
+
+
+        <a href="https://x.com/motorunrotasi"
+           target="_blank"
+           aria-label="X">
+
+          <svg viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227
+            8.26 8.502 11.24H16.17l-5.214-6.817L4.99
+            21.75H1.68l7.73-8.835L1.254
+            2.25H8.08l4.713 6.231
+            5.45-6.231z"/>
+          </svg>
+
+        </a>
+
+      </div>
+
+
+      <footer>
+        MOTORUN ROTASI • M.GÖR
+      </footer>
+
+    </div>
 
   </main>
+
 </body>
 </html>
