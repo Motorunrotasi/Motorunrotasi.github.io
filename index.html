@@ -287,7 +287,9 @@ footer {margin-top:24px;font-size:11px;color:rgba(255,255,255,.60);letter-spacin
         <p class="mr-settings-hint" id="mr-settings-hint">Parça bitince başa döner. Müzik kendiliğinden başlamaz.</p>
       </div>
       <p class="mr-error" id="mr-music-error" hidden></p>
-      <audio id="mr-audio" preload="none" loop></audio>
+      <audio id="mr-audio" preload="metadata" loop playsinline autoplay>
+        <source src="./badtimes.mp3?v=2" type="audio/mpeg">
+      </audio>
     </section>
     <noscript><p class="mr-nojs">Müzik kontrolleri için JavaScript gerekir. Sosyal medya bağlantılarını kullanmaya devam edebilirsin.</p></noscript>
 
@@ -316,7 +318,6 @@ footer {margin-top:24px;font-size:11px;color:rgba(255,255,255,.60);letter-spacin
 (() => {
   // This file is deliberately separate from the page's links and text.
   // No autoplay, account sign-in, cookies, analytics or external libraries.
-  const MUSIC_FILE = 'badtimes.mp3';
   const PUBLIC_URL = 'https://motorunrotasi.github.io/';
   const STORAGE_KEY = 'mr.preferences.v1';
   let prefs = {};
@@ -500,9 +501,9 @@ footer {margin-top:24px;font-size:11px;color:rgba(255,255,255,.60);letter-spacin
     render('loading', 'Yükleniyor...');
     beginWait();
     try {
-      // Keep play() in the original click event: no network await beforehand.
-      if (!audio.getAttribute('src')) audio.src = MUSIC_FILE;
-      else if (reload) audio.load();
+      // Ses kaynağı HTML içinde doğrudan tanımlı.
+      // Hata sonrası yeniden denemede aynı MP3 kaynağını tazele.
+      if (reload) audio.load();
       await audio.play();
       if (id !== requestId || !wantsPlayback) return;
       if (!audio.paused) render('playing', playingMessage());
@@ -536,7 +537,7 @@ footer {margin-top:24px;font-size:11px;color:rgba(255,255,255,.60);letter-spacin
     if (wantsPlayback) { render('loading', 'Yükleniyor...'); beginWait(); }
   });
   audio.addEventListener('error', () => {
-    if (!audio.getAttribute('src')) return;
+    if (!audio.currentSrc) return;
     fail('Müzik yüklenemedi.', 'badtimes.mp3 dosyasını index.html ile aynı klasöre yükle. Dosya zaten varsa bağlantıyı ve MP3 biçimini kontrol edip tekrar dene.');
   });
   for (const event of ['timeupdate','loadedmetadata','durationchange','seeked']) audio.addEventListener(event, updateTime);
@@ -595,6 +596,49 @@ footer {margin-top:24px;font-size:11px;color:rgba(255,255,255,.60);letter-spacin
   updateVolume();
   updateTime();
   player.hidden = false;
+
+  // Sayfa açılır açılmaz sesli oynatmayı dene.
+  // Tarayıcı engellerse ilk kullanıcı etkileşiminde otomatik başlat.
+  const tryAutoplay = async () => {
+    if (!audio.paused) return;
+    wantsPlayback = true;
+    errorBox.hidden = true;
+    render('loading', 'Müzik başlatılıyor...');
+    try {
+      await audio.play();
+      if (!audio.paused) {
+        render('playing', playingMessage());
+        return;
+      }
+    } catch (error) {
+      wantsPlayback = false;
+      if (error && error.name === 'NotAllowedError') {
+        render('paused', 'Ses için ekrana bir kez dokun');
+      } else {
+        render('paused', 'Müziği başlatmak için dokun');
+      }
+    }
+  };
+
+  const startOnFirstInteraction = async () => {
+    if (!audio.paused) return;
+    try {
+      wantsPlayback = true;
+      errorBox.hidden = true;
+      await audio.play();
+      if (!audio.paused) render('playing', playingMessage());
+    } catch (_) {
+      wantsPlayback = false;
+    }
+  };
+
+  window.addEventListener('load', () => {
+    void tryAutoplay();
+  }, { once: true });
+
+  ['pointerdown', 'touchstart', 'keydown'].forEach(eventName => {
+    document.addEventListener(eventName, startOnFirstInteraction, { once: true, passive: eventName !== 'keydown' });
+  });
 })();
 </script>
 
